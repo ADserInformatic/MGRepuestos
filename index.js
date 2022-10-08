@@ -24,6 +24,9 @@ mongoose.connect(uri,{
 
  const Clients =require ('./routes/clients');
  app.use('/api/client',Clients);
+ const Login =require ('./routes/login');
+ app.use('/api/login',Login);
+
 
  app.get('/',(req,res)=>{
      res.json({

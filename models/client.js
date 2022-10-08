@@ -7,6 +7,7 @@ const clientSchema= mongoose.Schema({
     cellphone: {type: String, required: true},
     email: {type: String, required: true},
     buys:{type: Array, default: []},
+    pays:{type: Array, default: []}
 })
 module.exports=mongoose.model('client',clientSchema);
 
@@ -15,9 +16,15 @@ module.exports=mongoose.model('client',clientSchema);
 // buys=[
 // {   subtotal:"",
 //     productos:[{
+//         fecha:"",
 //         cantidad:"",
 //         detalles:"",
 //         preciounitario:""}]
-    
 // }
+// ]
+
+// pays=[
+//     {   fecha:"",
+//         entrega:""
+//     }
 // ]
