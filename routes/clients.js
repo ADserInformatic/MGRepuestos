@@ -46,7 +46,31 @@ router.post('/NewClient',async(req,res)=>{
     }
 })
 
+router.post('/AddBuy/:id',async(req,res)=>{
+    const id=req.params.id
+    const cliente= await Clients.findOne({_id:id});
 
+    // cliente.name=req.body.data.name;
+    // cliente.lastname=req.body.data.lastname;
+    // cliente.cellphone=req.body.data.cellphone;
+    // cliente.email=req.body.data.email;
+    cliente.buys.push(req.body.data.buys);
+    cliente.pays.push(req.body.data.pays);
+    try {
+         cliente.save();
+         res.json({
+             error: false,
+             mensaje: "007" //DATO ALMACENADO CORRECTAMENTE
+         })
+     }
+     catch (error) {
+         res.json({
+             error: true,
+             mensaje: "008", //ERROR AL ALMACENAR DATO
+             message: error
+         })
+     }
+})
 module.exports = router;
 
 
