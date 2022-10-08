@@ -3,7 +3,8 @@ const Clients=require ('../models/client');
 // const addMonths = require('date-fns/addMonths');
 // const fs = require('fs-extra');
 // const format = require('date-fns/format');
-const cron =require ('node-cron')
+const cron =require ('node-cron')//para programar tarea
+var request = require("request");//para enviar mensajes de wsp
 
 const job = cron.schedule('0 10 3 * *', async () => {//TAREA A LAS 10 EN PUNTO DEL DIA 3 DE CADA MES DURANTE EL AÑO
     const clientes = await Clients.find()
@@ -19,9 +20,25 @@ const job = cron.schedule('0 10 3 * *', async () => {//TAREA A LAS 10 EN PUNTO D
         if(TotalDeuda-Entregas>0){ //CALCULO SI TIENE UNA DEUDA
 
 
-            //***************************************ENVIAR MENSAJE DE DEUDA**************************
+            var options = {
+                method: 'POST',
+                url: 'https://api.ultramsg.com/instance1150/messages/chat',
+                headers: {'content-type': 'application/x-www-form-urlencoded'},
+                form: {
+                  token: 'Instance_token',
+                  to: '3436222320',
+                  body: 'WhatsApp API on UltraMsg.com works good',
+                  priority: '10',
+                  referenceId: ''
+                }
+              };
+              request(options, function (error, response, body) {
+                if (error) throw new Error(error);
+              
+                console.log(body);
+              });
 
-            
+
         }        
     }
 }, {
@@ -31,6 +48,28 @@ const job = cron.schedule('0 10 3 * *', async () => {//TAREA A LAS 10 EN PUNTO D
 job.start()
 
 
+//prueba enviar mensaje
+router.post('/send',async(req,res)=>{
+    var options = {
+        method: 'POST',
+        url: 'https://api.ultramsg.com/instance1150/messages/chat',
+        headers: {'content-type': 'application/x-www-form-urlencoded'},
+        form: {
+          token: 'Instance_token',
+          to: '3436222320',
+          body: 'WhatsApp API on UltraMsg.com works good',
+          priority: '10',
+          referenceId: ''
+        }
+      };
+      request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+        res.json({
+            err:true,
+            mensaje: body})
+        console.log(body);
+      });
+})
 //Envia la lista de clientes con las compras y pagos q ha hecho
 router.get('/GetClients',async(req,res)=>{
     const Response=await Clients.find()
