@@ -15,8 +15,8 @@ module.exports=mongoose.model('client',clientSchema);
 
 // buys=[
 // {   subtotal:"",
-//     productos:[{
-//         fecha:"",
+//     fecha:"",
+//     productos:[{    
 //         cantidad:"",
 //         detalles:"",
 //         preciounitario:""}]

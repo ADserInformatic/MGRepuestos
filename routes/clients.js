@@ -23,19 +23,82 @@ router.get('/GetClients',async(req,res)=>{
 })
 
 router.post('/NewClient',async(req,res)=>{
-    
-    if(Response){
+    const cliente= new Clients();
+    cliente.name=req.body.data.name;
+    cliente.lastname=req.body.data.lastname;
+    cliente.cellphone=req.body.data.cellphone;
+    cliente.email=req.body.data.email;
+    cliente.buys=req.body.data.buys;
+    cliente.pays=req.body.data.pays;
+    try {
+        cliente.save();
         res.json({
-            error:false,
-            data: Response
+            error: false,
+            mensaje: "007" //DATO ALMACENADO CORRECTAMENTE
         })
-    }else{
+    }
+    catch (error) {
         res.json({
-            error:true,
-            mensaje: 'NO SE ENCUENTRAN Clientes'
+            error: true,
+            mensaje: "008", //ERROR AL ALMACENAR DATO
+            message: error
         })
     }
 })
 
 
 module.exports = router;
+
+
+// EJEMPLO DE JSON RECIBIDO PARA NEW CLIENT
+// {"data":{
+//     "name":"prueba1",
+//     "lastname":"probando",
+//     "cellphone":"34343434",
+//     "email":"correo@gmail.com",
+//     "buys":[
+//       {"subtotal":"400",
+//         "fecha":"15 dic",
+//         "productos":
+//             [{  "cantidad":"3",
+//                 "detalles":"escobillas",
+//                 "preciounitario":"100"
+//               },
+//               { "cantidad":"1",
+//                 "detalles":"escor",
+//                 "preciounitario":"100"
+//             }]
+//       },
+//       {"subtotal":"1400",
+//         "fecha":"10 dic",
+//         "productos":[
+//           {"cantidad":"2",
+//             "detalles":"zapatillas",
+//             "preciounitario":"100"
+//           },
+//           {"cantidad":"1",
+//             "detalles":"escoba",
+//             "preciounitario":"1200"}
+//           ]
+//       },
+//       {"subtotal":"400",
+//         "fecha":"5 dic",
+//         "productos":[
+//           {"cantidad":"1",
+//             "detalles":"lastre",
+//             "preciounitario":"400"
+//           }]
+//       }
+//       ],
+//     "pays":[
+//       {
+//         "fecha":"15 dic",
+//         "entrega":"1500"
+//       },
+//       {        
+//         "fecha":"7 dic",
+//         "entrega":"300"
+//       }
+//       ]
+// }
+// }
