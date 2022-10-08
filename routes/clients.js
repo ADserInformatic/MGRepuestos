@@ -5,6 +5,31 @@ const Clients=require ('../models/client');
 // const format = require('date-fns/format');
 const cron =require ('node-cron')
 
+const job = cron.schedule('0 10 3 * *', async () => {//TAREA A LAS 10 EN PUNTO DEL DIA 3 DE CADA MES DURANTE EL AÑO
+    const clientes = await Clients.find()
+    for (let i = 0; i < clientes.length; i++) {//CALCULO DEUDA POR CADA CLIENTE
+        const TotalDeuda = 0;
+        const Entregas =0;
+        for (let x =0; x<clientes.buys.length;x++){//SUMO EL TOTAL DE LA DEUDA
+            TotalDeuda+=clientes.buys[x].subtotal;
+        }
+        for (let y =0; y<clientes.pays.length;y++){//SUMO EL TOTAL DE ENTREGAS
+            Entregas+=clientes.pays[y].entrega;
+        }
+        if(TotalDeuda-Entregas>0){ //CALCULO SI TIENE UNA DEUDA
+
+
+            //***************************************ENVIAR MENSAJE DE DEUDA**************************
+
+            
+        }        
+    }
+}, {
+    scheduled: true,
+    timezone: "America/Argentina/Buenos_Aires"
+});
+job.start()
+
 
 //Envia la lista de clientes con las compras y pagos q ha hecho
 router.get('/GetClients',async(req,res)=>{
