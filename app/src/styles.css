@@ -1,4 +1,8 @@
 *{
     margin: 0px;
     padding: 0px;
+    transition: all .5s;
+    box-sizing: border-box;
 } 
+
+

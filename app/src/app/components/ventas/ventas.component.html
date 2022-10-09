@@ -1,0 +1,87 @@
+<div class="body">
+    <div class="datos">
+        <div class="buscador">
+            <label for="cliente">Cliente:</label>
+            <select name="Juan Perez" id="cliente">
+                <option value="Ramon Cabrera">Ramon Cabrera</option>
+                <option value="Juan Perez">Juan Perez</option>
+                <option value="Juan Perez">Juan Perez</option>
+            </select>
+        </div>
+        <form class="cliente">
+            <div class="form-block">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre">
+            </div>
+            <div class="form-block">
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido">
+            </div>
+            <div class="form-block">
+                <label for="Email">Email:</label>
+                <input type="text" id="Email">
+            </div>
+            <div class="form-block">
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono">
+            </div>
+        </form>
+        <div class="venta">
+            <div class="detalles">
+                <div class="productos">
+                    <form [formGroup]="formProducto">
+                        <div class="form-block">
+                            <label for="Producto">Producto:</label>
+                            <input formControlName="producto" type="text" id="Producto">
+                        </div>
+                        <div class="form-block">
+                            <label for="Cantidad">Cantidad:</label>
+                            <input formControlName="cantidad" type="number" id="Cantidad">
+                        </div>
+                        <div class="form-block">
+                            <label for="Precio">Precio unitario:</label>
+                            <input formControlName="precio" type="number" id="Precio" placeholder="$">
+                        </div>
+                        <button (click)="agregar()">Agregar</button>
+                    </form>
+                    <div class="lista" #pdf>
+                        <div class="cabecera">
+                            <h2>María Grande Repuestos</h2>
+                            <h3>{{fecha}}</h3>
+                        </div>
+                        <table>
+                            <tr>
+                              <th>Cantidad</th>
+                              <th>Detalles</th>
+                              <th>Precio unitario</th>
+                              <th>Total</th>
+                            </tr>
+                            <tr *ngFor="let item of compra">
+                              <td>{{item.cantida}}</td>
+                              <td>{{item.detalle}}</td>
+                              <td>{{item.precioU | currency}}</td>
+                              <td>{{item.precioT | currency}}</td>
+                              <button title="Eliminar" (click)="eliminar(item.num)">-</button>
+                            </tr>
+                        </table>
+                        <div class="total">
+                            <ng-container *ngIf="total > 0">
+                                <h3>Total: {{total | currency}}</h3>
+                            
+                                <h3>Entrega: $ <input name="entrega" [(ngModel)]="entrega" type="number"></h3> 
+                            </ng-container>
+                            
+                            <ng-container *ngIf="entrega < total">
+                                <h3>Debe: {{total - entrega | currency}}</h3>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="finalizar">
+            <button (click)="imprimir()">Finalizar compra</button>
+        </div>
+    </div>
+    
+</div>

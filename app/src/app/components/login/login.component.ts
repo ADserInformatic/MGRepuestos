@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   public form: FormGroup;
+  public cualquiera: string = 'blue';
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {

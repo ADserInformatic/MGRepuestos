@@ -1,0 +1,139 @@
+.body{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.body .datos{
+    border: solid .7px #fff;
+    width: 80%;
+    margin: auto;
+}
+.body .datos .buscador{
+    padding: 1% 5%;
+    background: #fff;
+    margin-bottom: 10px;
+}
+.body .datos .cliente{
+    padding: 5%;
+    background: #fff;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 20px;
+}
+.body .datos .cliente .form-block{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+.body .datos .cliente .form-block input{
+    border: none;
+    outline: none;
+    border-bottom: solid .7px var(--color1);
+    padding: 5px;
+}
+.body .productos .lista{
+    background: #fff;
+    width: 100%;
+}
+.lista .total{
+    width: 90%;
+    margin: 20px auto 0px auto;
+    text-align: end;
+    padding-bottom: 20px;
+}
+.lista .total input{
+    border: none;
+    outline: none;
+    border-bottom: solid .7px var(--color2);
+    padding: 5px;
+}
+.lista .total h3{
+    margin-top: 10px;
+}
+.body .productos .lista table{
+    width: 100%;
+    text-align: center;
+}
+.lista .cabecera{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0px;
+    margin: auto;
+}
+.venta .detalles .productos form{
+    width: 100%;
+    display: flex;
+    background: #fff;
+    justify-content: space-around;
+    padding: 1% 5%;
+    margin: 1% 0px;
+}
+.productos form .form-block{
+    width: 25%;
+}
+.venta .detalles .productos form input{
+    border: none;
+    outline: none;
+    border-bottom: solid .7px var(--color1);
+    padding: 10px;
+    margin: 0px 10px;
+}
+.venta .detalles .productos form button{
+    background: var(--color2);
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    padding: 10px;
+}
+th, td{
+    border-bottom:1px solid black;
+    padding: 10px 0px;
+}
+th{
+    text-transform: uppercase;
+    font-weight: bold;
+}
+table{
+    border:1px solid black;
+    margin: 20px 0px;
+}
+tr{
+    align-items: center;
+}
+tr button{
+    padding: 5px 10px;
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    background: red;
+    outline: none;
+    cursor: pointer;
+}
+.finalizar{
+    width: 100%;
+    padding: 10px 5%;
+    background: #fff;
+    margin-top: 20px;
+}
+.finalizar button{
+    margin: auto;
+    width: 100%;
+    color: #fff;
+    background: #000;
+    cursor: pointer;
+    border-radius: 2px;
+    border: none;
+    outline: none;
+    padding: 10px 0px;
+}
+
+@media screen and (max-width: 1200px){
+    .body .datos{
+        width: 100%;
+    }
+}
