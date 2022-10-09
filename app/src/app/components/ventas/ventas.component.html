@@ -1,29 +1,50 @@
 <div class="body">
     <div class="datos">
         <div class="buscador">
-            <label for="cliente">Cliente:</label>
-            <select name="Juan Perez" id="cliente">
-                <option value="Ramon Cabrera">Ramon Cabrera</option>
-                <option value="Juan Perez">Juan Perez</option>
-                <option value="Juan Perez">Juan Perez</option>
+            <label for="cliente">Cliente: </label>
+            <select #select name="Juan Perez" id="cliente" (click)="ver()">
+                <option *ngFor="let item of clientes" value="{{item._id}}">{{item.name +''+ item.lastname}}</option>
             </select>
+            <button (click)="nuevo()">Nuevo</button>
         </div>
-        <form class="cliente">
+        <form class="cliente" [formGroup]="formCliente" *ngIf="!seleccionado">
             <div class="form-block">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre">
+                <input formControlName="name" type="text" id="nombre">
             </div>
             <div class="form-block">
                 <label for="apellido">Apellido:</label>
-                <input type="text" id="apellido">
+                <input formControlName="lastname" type="text" id="apellido">
             </div>
             <div class="form-block">
                 <label for="Email">Email:</label>
-                <input type="text" id="Email">
+                <input formControlName="email" type="email" id="Email">
             </div>
             <div class="form-block">
                 <label for="telefono">Teléfono:</label>
-                <input type="text" id="telefono">
+                <input formControlName="cellphone" type="text" id="telefono">
+            </div>
+            <div class="form-btn">
+                <button [disabled]="formCliente.invalid" (click)="newCliente()">Guardar cliente</button>
+            </div>
+        </form>
+
+        <form class="cliente" *ngIf="seleccionado">
+            <div class="form-block">
+                <label for="nombre">Nombre:</label>
+                <input type="text" value="{{seleccionado.name}}" disabled id="nombre">
+            </div>
+            <div class="form-block">
+                <label for="apellido">Apellido:</label>
+                <input type="text" value="{{seleccionado.lastname}}" disabled id="apellido">
+            </div>
+            <div class="form-block">
+                <label for="Email">Email:</label>
+                <input type="text" value="{{seleccionado.email}}" disabled id="Email">
+            </div>
+            <div class="form-block">
+                <label for="telefono">Teléfono:</label>
+                <input type="text" value="{{seleccionado.cellphone}}" disabled id="telefono">
             </div>
         </form>
         <div class="venta">
@@ -42,7 +63,8 @@
                             <label for="Precio">Precio unitario:</label>
                             <input formControlName="precio" type="number" id="Precio" placeholder="$">
                         </div>
-                        <button (click)="agregar()">Agregar</button>
+                        <button [disabled]="formProducto.invalid" (click)="agregar()">Agregar</button>
+                        <div class="bloquear" *ngIf="!seleccionado"></div>
                     </form>
                     <div class="lista" #pdf>
                         <div class="cabecera">
@@ -79,7 +101,7 @@
                 </div>
             </div>
         </div>
-        <div class="finalizar">
+        <div class="finalizar" *ngIf="total > 0">
             <button (click)="imprimir()">Finalizar compra</button>
         </div>
     </div>

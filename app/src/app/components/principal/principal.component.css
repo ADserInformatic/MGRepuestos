@@ -31,6 +31,9 @@
     width: 70%;
 }
 @media screen and (max-width: 1320px) {
+    .body{
+        padding-bottom: 10%;
+    }
     .body .seccion{
         width: 80%;
     }
@@ -54,5 +57,11 @@
     }
     .body .lateral button{
         padding: 1%;
+    }
+}
+@media screen and (max-width: 520px){
+    .body .seccion{
+        width: 100%;
+        margin-top: 5%;
     }
 }

@@ -1,8 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Venta } from 'src/app/modelos/venta';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
+import { DatosService } from 'src/app/services/datos.service';
+import { PeticionesService } from 'src/app/services/peticiones.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -11,26 +13,43 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   styleUrls: ['./ventas.component.css']
 })
 export class VentasComponent implements OnInit {
-  @ViewChild('pdf') pdf: ElementRef; 
+  @ViewChild('select') seleccion: ElementRef;
+  public clientes!: any;
+  public seleccionado!: any;
   entrega: number;
   fecha: string = new Date().toLocaleDateString();
   formProducto: FormGroup;
+  formCliente: FormGroup;
   compra: Array<Venta> = [];
   vendido: Venta;
   total: number = 0;
   numero = 0;
   pdfDef: any;
 
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder,
+              private servDatos: DatosService,
+              private servApi: PeticionesService) { 
      this.vendido;
   }
 
   ngOnInit(): void {
     this.formProducto = this.fb.group({
-      producto: '',
-      cantidad: Number,
-      precio: Number
+      producto: ['', [Validators.required]],
+      cantidad: ['', [Validators.required, Validators.minLength(1)]],
+      precio: ['', [Validators.required, Validators.minLength(1)]]
     })
+
+    this.formCliente = this.fb.group({
+      name: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      cellphone: ['', [Validators.required]],
+      email: ['', [Validators.required]]
+    })
+
+    this.servDatos.clientes.subscribe(res=>{
+      this.clientes = res;
+    })
+
   }
   agregar(){
     const objeto = {
@@ -63,7 +82,6 @@ export class VentasComponent implements OnInit {
     this.compra.forEach(element => {
       tabl.push([element.cantida, element.detalle, `$${element.precioU}`, `$${element.precioT}`]) 
     });
-    console.log(tabl)
     this.pdfDef = {
     content: [
       {
@@ -97,6 +115,47 @@ export class VentasComponent implements OnInit {
 
     const pdf = pdfMake.createPdf(this.pdfDef);
     pdf.open();
+    const buy = {
+      data: {
+        buys:{subtotal: this.total,
+                fecha: this.fecha,
+                productos: this.compra
+              },
+        pays:{
+          fecha: this.fecha,
+          entrega: this.entrega
+        }
+      }
+    }
+    this.servApi.newBuy(this.seleccion.nativeElement.value, buy).subscribe(res=>{
+      console.log(res)
+      this.compra = []
+    })
+  }
+
+  ver(){
+    console.log(this.seleccion.nativeElement.value)
+    for (let i = 0; i < this.clientes.length; i++) {
+      const element = this.clientes[i];
+      if(this.seleccion.nativeElement.value == element._id){
+        console.log(element)
+        this.seleccionado = element
+      }
+      
+    }
+  }
+
+  newCliente(){
+    this.servApi.newClient({data: this.formCliente.value}).subscribe(res=>{
+      this.servApi.getClient().subscribe(res=>{
+        this.servDatos.clientes.emit(res.data)
+        this.formCliente.reset()
+      })
+    })
+  }
+
+  nuevo(){
+    this.seleccionado = '';
   }
 
 }
