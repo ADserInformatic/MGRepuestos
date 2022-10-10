@@ -5,12 +5,12 @@ div button{
     color: #fff;
     background: #000;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 50%;
     border: none;
     outline: none;
     position: absolute;
-    right: 20px;
-    top: 20px;
+    right: 10px;
+    top: 30px;
     cursor: pointer;
     transition: all .6s;
     text-transform: uppercase;

@@ -1,0 +1,35 @@
+.body{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.body .datos{
+    border: solid .7px #fff;
+    width: 80%;
+    margin: auto;
+    background: #fff;
+}
+.datos h2{
+    padding: 10px;
+}
+.body .datos .deudores{
+    margin: 10px 0px 20px 0px;
+    padding: 10px;
+}
+.deudores .title{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid .7px #000;
+    
+}
+.deudores li{
+    list-style: none;
+    border-bottom: solid .7px var(--color3);
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.deudores li:hover{
+    background: var(--color3);
+}

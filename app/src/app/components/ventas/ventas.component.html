@@ -3,7 +3,7 @@
         <div class="buscador">
             <label for="cliente">Cliente: </label>
             <select #select name="Juan Perez" id="cliente" (click)="ver()">
-                <option *ngFor="let item of clientes" value="{{item._id}}">{{item.name +''+ item.lastname}}</option>
+                <option *ngFor="let item of clientes" value="{{item._id}}">{{item.name +' '+ item.lastname}}</option>
             </select>
             <button (click)="nuevo()">Nuevo</button>
         </div>
@@ -63,7 +63,10 @@
                             <label for="Precio">Precio unitario:</label>
                             <input formControlName="precio" type="number" id="Precio" placeholder="$">
                         </div>
-                        <button [disabled]="formProducto.invalid" (click)="agregar()">Agregar</button>
+                        <div class="btn">
+                           <button [disabled]="formProducto.invalid" (click)="agregar()">Agregar</button> 
+                        </div>
+                        
                         <div class="bloquear" *ngIf="!seleccionado"></div>
                     </form>
                     <div class="lista" #pdf>
@@ -83,7 +86,7 @@
                               <td>{{item.detalle}}</td>
                               <td>{{item.precioU | currency}}</td>
                               <td>{{item.precioT | currency}}</td>
-                              <button title="Eliminar" (click)="eliminar(item.num)">-</button>
+                              <button title="Eliminar" (click)="eliminar(item.num)"><i class="icofont-ui-delete"></i></button>
                             </tr>
                         </table>
                         <div class="total">

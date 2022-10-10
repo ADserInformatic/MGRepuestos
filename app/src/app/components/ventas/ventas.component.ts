@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Venta } from 'src/app/modelos/venta';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
-import { DatosService } from 'src/app/services/datos.service';
 import { PeticionesService } from 'src/app/services/peticiones.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -27,7 +26,6 @@ export class VentasComponent implements OnInit {
   pdfDef: any;
 
   constructor(private fb: FormBuilder,
-              private servDatos: DatosService,
               private servApi: PeticionesService) { 
      this.vendido;
   }
@@ -46,9 +44,8 @@ export class VentasComponent implements OnInit {
       email: ['', [Validators.required]]
     })
 
-    this.servDatos.clientes.subscribe(res=>{
-      this.clientes = res;
-    })
+    this.clientes = JSON.parse(localStorage.getItem("clientes"));
+    
 
   }
   agregar(){
@@ -148,7 +145,8 @@ export class VentasComponent implements OnInit {
   newCliente(){
     this.servApi.newClient({data: this.formCliente.value}).subscribe(res=>{
       this.servApi.getClient().subscribe(res=>{
-        this.servDatos.clientes.emit(res.data)
+        localStorage.setItem("clientes", JSON.stringify(res.data) )
+        this.clientes = JSON.parse(localStorage.getItem("clientes"));
         this.formCliente.reset()
       })
     })

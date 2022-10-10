@@ -1,1 +1,15 @@
-<p>deudores works!</p>
+<div class="body">
+    <div class="datos">
+        <h2>Deudores</h2>
+        <div class="deudores">
+            <div class="title">
+                <h3>Cliente</h3>
+                <h3>Monto</h3>
+            </div>
+            <li *ngFor="let item of clientes">
+                <p>{{item.name}}</p>
+                <p>{{item.lastname}}</p>
+            </li>
+        </div>
+    </div>
+</div>
