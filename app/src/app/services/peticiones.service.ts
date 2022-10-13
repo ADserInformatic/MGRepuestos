@@ -20,7 +20,10 @@ export class PeticionesService {
   newBuy(id: any, buy: any): Observable<any>{
     return this.http.post(`${this.url}/api/client/AddBuy/${id}`, buy)
   }
-  addpay(id: any, pago: any): Observable<any>{
-    return this.http.post(`${this.url}/api/Client/AddBay${id}`, pago)
+  addpay(id: any, data: any): Observable<any>{
+    return this.http.post(`${this.url}/api/Client/AddPay/${id}`, data)
+  }
+  login(user: any): Observable<any>{
+    return this.http.post(`${this.url}/api/login/login`, user)
   }
 }

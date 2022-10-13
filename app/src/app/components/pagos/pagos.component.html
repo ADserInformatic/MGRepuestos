@@ -12,9 +12,9 @@
                     <h3>Cliente: <i>{{seleccionado?.name}} {{seleccionado?.lastname}}</i></h3>
                     <span *ngIf="seleccionado">
                         <label for="pago">Paga: </label>  
-                        <input type="number" [(ngModel)]="entrega" >
+                        <input placeholder="$" type="number" [(ngModel)]="entrega" >
                     </span>
-                    <button (click)="pago()">Ingresar pago</button>
+                    <button [disabled]="!entrega" (click)="pago()">Ingresar pago</button>
                 </div>
             </div>
         </div>

@@ -32,12 +32,13 @@ export class PagosComponent implements OnInit {
   }
 
   pago(){
-    const pagador = {
+    const data = {data: {
       fecha: this.fecha,
-      entrego: this.entrega
-    }
-    this.apiServ.addpay(this.seleccionado._id, pagador).subscribe(res=>{
-      console.log(res)
+      entrega: this.entrega
+    }}
+    
+    this.apiServ.addpay(this.seleccionado._id, data).subscribe(res=>{
+       console.log(res)
     })
     this.pdfDef = {
       content: [
@@ -60,26 +61,21 @@ export class PagosComponent implements OnInit {
           alignment: 'right'
         },
         {
-          text: `Cliente: ${this.seleccionado.name} ${this.seleccionado.lastname}`,
-          style: 'header',
-          alignment: 'left',
-          fontSize: 20
+          text: '  '
+        },
+        {
+          text: ' '
+        },
+        {
+          table: {
+            widths: ['*', '*'],
+            body: [
+              [{text:'Cliente', fontSize: 20, bold: true}, {text:`${this.seleccionado.name} ${this.seleccionado.lastname}`, fontSize: 20}],
+              [{text:'Entrega', fontSize: 20, bold: true}, {text: `$ ${this.entrega}`, fontSize: 20}]
+            ]
+          }
         },
         
-        {
-          text: ' '
-        },
-        {
-          text: ' '
-        },
-        {
-          text: `Entrega: $${this.entrega}`,
-          alignment: 'left',
-          fontSize: 20
-        },
-        {
-          text: ' '
-        }
         ]
       }
       const pdf = pdfMake.createPdf(this.pdfDef);

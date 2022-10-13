@@ -27,6 +27,10 @@
 .body .lateral button:hover{
     background: var(--color3);
 }
+.body .lateral button.select{
+    background: var(--color3);
+    filter: brightness(.7);
+}
 .body .seccion{
     width: 70%;
 }

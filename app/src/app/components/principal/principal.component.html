@@ -1,8 +1,8 @@
 <div class="body">
     <div class="lateral">
-        <button (click)="deudas()">Deudores</button>
-        <button (click)="pago()">Pagos</button>
-        <button (click)="venta()">Venta</button>
+        <button [ngClass]="{'select': deudores}" (click)="deudas()">Deudores</button>
+        <button [ngClass]="{'select': pagos}" (click)="pago()">Pagos</button>
+        <button [ngClass]="{'select': ventas}" (click)="venta()">Venta</button>
     </div>
     <div class="seccion">
         <!-- <router-outlet></router-outlet> -->
