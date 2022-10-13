@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PeticionesService } from 'src/app/services/peticiones.service';
 
 
 @Component({
@@ -7,9 +8,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./principal.component.css']
 })
 export class PrincipalComponent implements OnInit {
-  constructor() { }
+  public deudores: boolean = false;
+  public pagos: boolean = false;
+  public ventas: boolean = true;
+  public clientes: any;
+  constructor(private servApi: PeticionesService) { }
 
   ngOnInit(): void {
+    this.actualizar()
   }
-
+  deudas(){
+    this.deudores = true;
+    this.pagos = false;
+    this.ventas = false;
+  }
+  venta(){
+    this.deudores = false;
+    this.pagos = false;
+    this.ventas = true;
+  }
+  pago(){
+    this.deudores = false;
+    this.pagos = true;
+    this.ventas = false;
+  }
+  actualizar(){
+    this.servApi.getClient().subscribe(res=>{
+      this.clientes = res.data
+    })
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Output, ViewChild, EventEmitter} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Venta } from 'src/app/modelos/venta';
 import pdfMake from "pdfmake/build/pdfmake";
@@ -7,13 +7,14 @@ import { PeticionesService } from 'src/app/services/peticiones.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
-  selector: 'app-compras',
+  selector: 'app-ventas',
   templateUrl: './ventas.component.html',
   styleUrls: ['./ventas.component.css']
 })
 export class VentasComponent implements OnInit {
   @ViewChild('select') seleccion: ElementRef;
-  public clientes!: any;
+  @Input() clientes!: any;
+  @Output() atualizarDatos = new EventEmitter()
   public seleccionado!: any;
   entrega: number;
   fecha: string = new Date().toLocaleDateString();
@@ -43,8 +44,6 @@ export class VentasComponent implements OnInit {
       cellphone: ['', [Validators.required]],
       email: ['', [Validators.required]]
     })
-
-    this.clientes = JSON.parse(localStorage.getItem("clientes"));
     
 
   }
@@ -75,16 +74,24 @@ export class VentasComponent implements OnInit {
   }
 
   imprimir(){
-    let tabl: any = [['Cantidad', 'Detalle', 'Precio unitario', 'Precio total']];
+    let tabl: any = [[{text:'Cantidad', style: 'tableHeader',  alignment: 'center', bold: true}, {text:'Detalle', style: 'tableHeader', alignment: 'center', bold: true} , {text: 'Precio unitario', style: 'tableHeader', alignment: 'center', bold: true}, {text: 'Precio total', style: 'tableHeader', alignment: 'center', bold: true}]];
     this.compra.forEach(element => {
       tabl.push([element.cantida, element.detalle, `$${element.precioU}`, `$${element.precioT}`]) 
     });
     this.pdfDef = {
     content: [
       {
-        text: 'María grande Repuestos',
+        text: 'MARÍA GRANDE REPUESTOS',
         style: 'header',
-        alignment: 'center'
+        alignment: 'center',
+        bold: true,
+        fontSize: 20
+      },
+      {
+        text: '  '
+      },
+      {
+        text: ' '
       },
       {
         text: `Fecha: ${this.fecha}`,
@@ -92,17 +99,45 @@ export class VentasComponent implements OnInit {
         alignment: 'right'
       },
       {
+        text: `Cliente: ${this.seleccionado.name} ${this.seleccionado.lastname}`,
+        style: 'header',
+        alignment: 'left'
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
         table: {
-          widths: [100, '*', 200, '*'],
-          body: tabl
+          widths: ['*', '*', '*', '*'],
+          body: tabl,
+          headerRows: 1
         }
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
       },
       {
         text: `Total: $${this.total}`,
         alignment: 'right'
       },
       {
+        text: ' '
+      },
+      {
         text: `Entrega: $${this.entrega}`,
+        alignment: 'right'
+      },
+      {
+        text: ' '
+      },
+      {
+        text: `Deuda: $${this.total - this.entrega}`,
         alignment: 'right'
       }
       ]
@@ -126,12 +161,12 @@ export class VentasComponent implements OnInit {
     }
     this.servApi.newBuy(this.seleccion.nativeElement.value, buy).subscribe(res=>{
       console.log(res)
-      this.compra = []
+      this.compra = [];
+      this.total = 0;
     })
   }
 
   ver(){
-    console.log(this.seleccion.nativeElement.value)
     for (let i = 0; i < this.clientes.length; i++) {
       const element = this.clientes[i];
       if(this.seleccion.nativeElement.value == element._id){
@@ -145,8 +180,7 @@ export class VentasComponent implements OnInit {
   newCliente(){
     this.servApi.newClient({data: this.formCliente.value}).subscribe(res=>{
       this.servApi.getClient().subscribe(res=>{
-        localStorage.setItem("clientes", JSON.stringify(res.data) )
-        this.clientes = JSON.parse(localStorage.getItem("clientes"));
+        this.atualizarDatos.emit()
         this.formCliente.reset()
       })
     })
