@@ -132,6 +132,13 @@ export class VentasComponent implements OnInit {
       {
         text: `Entrega: $${this.entrega}`,
         alignment: 'right'
+      },
+      {
+        text: ' '
+      },
+      {
+        text: `Deuda: $${this.total - this.entrega}`,
+        alignment: 'right'
       }
       ]
     }
@@ -154,12 +161,12 @@ export class VentasComponent implements OnInit {
     }
     this.servApi.newBuy(this.seleccion.nativeElement.value, buy).subscribe(res=>{
       console.log(res)
-      this.compra = []
+      this.compra = [];
+      this.total = 0;
     })
   }
 
   ver(){
-    console.log(this.seleccion.nativeElement.value)
     for (let i = 0; i < this.clientes.length; i++) {
       const element = this.clientes[i];
       if(this.seleccion.nativeElement.value == element._id){
