@@ -1,6 +1,8 @@
 import { PeticionesService } from 'src/app/services/peticiones.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder} from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -11,7 +13,7 @@ import { FormGroup, FormBuilder} from '@angular/forms';
 export class LoginComponent implements OnInit {
   public form: FormGroup;
   public cualquiera: string = 'blue';
-  constructor(private fb: FormBuilder, private http: PeticionesService) { }
+  constructor(private fb: FormBuilder, private http: PeticionesService, private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -35,7 +37,8 @@ export class LoginComponent implements OnInit {
   
         }else{
           localStorage.setItem('MGR', JSON.stringify(res.data ) );
-          console.log(res.data)
+          
+          this.router.navigate(['MGRepuestos']);
         }
         
       }
