@@ -9,12 +9,12 @@
                 </select>
                 <div class="pago">
                     <p>{{fecha }}</p>
-                    <h3>Cliente: {{seleccionado?.name}} {{seleccionado?.lastname}}</h3>
+                    <h3>Cliente: <i>{{seleccionado?.name}} {{seleccionado?.lastname}}</i></h3>
                     <span *ngIf="seleccionado">
                         <label for="pago">Paga: </label>  
-                        <input type="number">
+                        <input placeholder="$" type="number" [(ngModel)]="entrega" >
                     </span>
-                    <button>Ingresar pago</button>
+                    <button [disabled]="!entrega" (click)="pago()">Ingresar pago</button>
                 </div>
             </div>
         </div>
