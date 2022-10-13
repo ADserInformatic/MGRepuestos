@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { PeticionesService } from 'src/app/services/peticiones.service';
@@ -12,6 +12,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export class PagosComponent implements OnInit {
   @ViewChild('select') seleccion: ElementRef;
   @Input() clientes: any;
+  @Output() atualizarDatos = new EventEmitter()
   public pdfDef: any;
   public seleccionado: any;
   public entrega: number;
@@ -39,6 +40,7 @@ export class PagosComponent implements OnInit {
     
     this.apiServ.addpay(this.seleccionado._id, data).subscribe(res=>{
        console.log(res)
+       this.atualizarDatos.emit()
     })
     this.pdfDef = {
       content: [
