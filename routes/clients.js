@@ -164,6 +164,7 @@ if (cliente){
 router.post('/AddPay/:id',async(req,res)=>{
     const id=req.params.id
     const cliente= await Clients.findOne({_id:id});
+    if(cliente){
     cliente.pays.push(req.body.data.pays);
     let TotalBuys=0;
     let TotalPays=0;
@@ -191,6 +192,8 @@ router.post('/AddPay/:id',async(req,res)=>{
              message: error
          })
      }
+    }
+    res.json({error:true, mensaje: "codigo",message: "no encontro cliente"})
 })
 module.exports = router;
 
