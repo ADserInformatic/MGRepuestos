@@ -92,22 +92,7 @@ router.post('/NewClient',async(req,res)=>{
     cliente.lastname=req.body.data.lastname;
     cliente.cellphone=req.body.data.cellphone;
     cliente.email=req.body.data.email;
-    cliente.buys=req.body.data.buys;
-    cliente.pays=req.body.data.pays;
-    
-    let TotalBuys=0;
-    let TotalPays=0;
-    if(cliente.buys){
-        for(let x=0;x<cliente.buys.length;x++){TotalBuys+=cliente.buys[x].subtotal}
-    }
-    if(cliente.pays){
-        for(let x=0;x<cliente.pays.length;x++){TotalPays+=cliente.pays[x].entrega}
-        
-    }
-    console.log(TotalBuys)
-    console.log(TotalPays)
-    cliente.deuda=TotalBuys-TotalPays;
-    
+   
 
     try {
         cliente.save();
@@ -128,9 +113,16 @@ router.post('/NewClient',async(req,res)=>{
 router.post('/AddBuy/:id',async(req,res)=>{
     const id=req.params.id
     const cliente= await Clients.findOne({_id:id});
-if (cliente){
-    cliente.buys.push(req.body.data.buys);
-    cliente.pays.push(req.body.data.pays);
+    
+    if (cliente){
+        cliente.buys=[];
+        cliente.pays=[];
+
+    if(req.body.data.pays){
+        cliente.pays.push(req.body.data.pays);}
+    if(cliente.buys){cliente.buys.push(req.body.data.buys);}
+    
+    
     let TotalBuys=0;
     let TotalPays=0;
     if(cliente.buys){
