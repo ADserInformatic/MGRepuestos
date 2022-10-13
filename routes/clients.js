@@ -128,9 +128,15 @@ router.post('/NewClient',async(req,res)=>{
 router.post('/AddBuy/:id',async(req,res)=>{
     const id=req.params.id
     const cliente= await Clients.findOne({_id:id});
-if (cliente){
-    cliente.buys.push(req.body.data.buys);
-    cliente.pays.push(req.body.data.pays);
+    
+    if (cliente){
+        cliente.buys=[];
+        cliente.pays=[];
+
+    if(req.body.data.pays){cliente.pays.push(req.body.data.pays);}}
+    if(cliente.buys){cliente.buys.push(req.body.data.buys);}
+    
+    
     let TotalBuys=0;
     let TotalPays=0;
     if(cliente.buys){
