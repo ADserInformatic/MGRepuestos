@@ -12,11 +12,8 @@ export class AppComponent implements OnInit{
   public color3: string = '#8FE3CF';
   public texto: string = 'icofont-sun';
   title = 'app';
-  constructor(private servApi: PeticionesService){}
+  constructor(){}
   ngOnInit(): void{
-    this.servApi.getClient().subscribe(res=>{
-      localStorage.setItem("clientes", JSON.stringify(res.data) )
-    })
   }
   cambiar(){
     if(this.color1 == '#EEEBDD'){

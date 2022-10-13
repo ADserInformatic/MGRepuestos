@@ -1,10 +1,13 @@
 <div class="body">
     <div class="lateral">
-        <button routerLink="deudores">Deudores</button>
-        <button routerLink="pagos">Pagos</button>
-        <button routerLink="ventas">Venta</button>
+        <button (click)="deudas()">Deudores</button>
+        <button (click)="pago()">Pagos</button>
+        <button (click)="venta()">Venta</button>
     </div>
     <div class="seccion">
-        <router-outlet></router-outlet>
+        <!-- <router-outlet></router-outlet> -->
+        <app-deudores [clientes]="clientes" *ngIf="deudores"></app-deudores>
+        <app-pagos [clientes]="clientes" *ngIf="pagos"></app-pagos>
+        <app-ventas (atualizarDatos)="actualizar()" [clientes]="clientes" *ngIf="ventas"></app-ventas>
     </div>
 </div>
