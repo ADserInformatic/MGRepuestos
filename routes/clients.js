@@ -135,6 +135,27 @@ router.post('/AddBuy/:id',async(req,res)=>{
          })
      }
 })
+
+
+router.post('/AddPay/:id',async(req,res)=>{
+    const id=req.params.id
+    const cliente= await Clients.findOne({_id:id});
+    cliente.pays.push(req.body.data.pays);
+    try {
+         cliente.save();
+         res.json({
+             error: false,
+             mensaje: "007" //DATO ALMACENADO CORRECTAMENTE
+         })
+     }
+     catch (error) {
+         res.json({
+             error: true,
+             mensaje: "008", //ERROR AL ALMACENAR DATO
+             message: error
+         })
+     }
+})
 module.exports = router;
 
 
