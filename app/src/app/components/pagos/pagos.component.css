@@ -28,6 +28,7 @@
     outline: none;
     border-bottom: solid .7px var(--color1);
     padding: 5px;
+    max-width: 100%;
 }
 .pago button{
     width: 100%;

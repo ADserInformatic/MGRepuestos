@@ -16,7 +16,7 @@ export class VentasComponent implements OnInit {
   @Input() clientes!: any;
   @Output() atualizarDatos = new EventEmitter()
   public seleccionado!: any;
-  entrega: number;
+  entrega: number = 0;
   fecha: string = new Date().toLocaleDateString();
   formProducto: FormGroup;
   formCliente: FormGroup;
