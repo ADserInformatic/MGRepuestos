@@ -9,8 +9,21 @@ var twilio = require('twilio');
 
 // Find your account sid and auth token in your Twilio account Console.
 //var client = new twilio('MG831f19fb057c965a23e4788103079286', '[Redacted]');
-
-
+const accountSid = 'ACb3b1b7a3bf7538f5908756d7dcb42d20'; 
+const authToken = '84bf2bb58b9d198fde3de0b28c3ab989'; 
+const client = require('twilio')(accountSid, authToken); 
+router.post('/senda', (req, res)=>{
+    
+ 
+client.messages 
+      .create({ 
+         body: 'Alí, tenés una deuda muy grande en María Grande Repuestos. Pagá desgraciau', 
+         from: 'whatsapp:+14155238886',       
+         to: 'whatsapp:+5493436222320' 
+       }) 
+      .then(res.json('ok')) 
+      .done();
+})
 
 const job = cron.schedule('0 10 3 * *', async () => {//TAREA A LAS 10 EN PUNTO DEL DIA 3 DE CADA MES DURANTE EL AÑO
     const clientes = await Clients.find()
@@ -67,8 +80,8 @@ router.post('/send',async(req,res)=>{
         url: 'https://api.ultramsg.com/instance1150/messages/chat',
         headers: {'content-type': 'application/x-www-form-urlencoded'},
         form: {
-          token: 'Instance_token',
-          to: '3436222320',
+          token: '84bf2bb58b9d198fde3de0b28c3ab989',
+          to: '543435341866',
           body: 'WhatsApp API on UltraMsg.com works good',
           priority: '10',
           referenceId: ''

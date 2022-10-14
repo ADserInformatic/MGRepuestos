@@ -9,5 +9,8 @@
     "request": "^2.88.2",
     "twilio": "^3.82.2",
     "uuid": "^9.0.0"
+  },
+  "scripts": {
+    "dev": "nodemon index.js"
   }
 }
