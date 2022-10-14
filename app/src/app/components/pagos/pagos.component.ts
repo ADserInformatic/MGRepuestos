@@ -41,6 +41,7 @@ export class PagosComponent implements OnInit {
     this.apiServ.addpay(this.seleccionado._id, data).subscribe(res=>{
        console.log(res)
        this.atualizarDatos.emit()
+
     })
     this.pdfDef = {
       content: [
@@ -82,5 +83,8 @@ export class PagosComponent implements OnInit {
       }
       const pdf = pdfMake.createPdf(this.pdfDef);
       pdf.open();
+      window.location.reload()
+
+
   }
 }
