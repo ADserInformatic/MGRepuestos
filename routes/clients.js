@@ -5,38 +5,50 @@ const Clients=require ('../models/client');
 // const format = require('date-fns/format');
 const cron =require ('node-cron')//para programar tarea
 var request = require("request");//para enviar mensajes de wsp
+var twilio = require('twilio');
+
+// Find your account sid and auth token in your Twilio account Console.
+//var client = new twilio('MG831f19fb057c965a23e4788103079286', '[Redacted]');
+
+
 
 const job = cron.schedule('0 10 3 * *', async () => {//TAREA A LAS 10 EN PUNTO DEL DIA 3 DE CADA MES DURANTE EL AÑO
     const clientes = await Clients.find()
     for (let i = 0; i < clientes.length; i++) {//CALCULO DEUDA POR CADA CLIENTE
-        const TotalDeuda = 0;
-        const Entregas =0;
-        for (let x =0; x<clientes.buys.length;x++){//SUMO EL TOTAL DE LA DEUDA
-            TotalDeuda+=clientes.buys[x].subtotal;
-        }
-        for (let y =0; y<clientes.pays.length;y++){//SUMO EL TOTAL DE ENTREGAS
-            Entregas+=clientes.pays[y].entrega;
-        }
-        if(TotalDeuda-Entregas>0){ //CALCULO SI TIENE UNA DEUDA
+        
+        if(clientes.deuda>0){ //CALCULO SI TIENE UNA DEUDA
 
 
-            var options = {
-                method: 'POST',
-                url: 'https://api.ultramsg.com/instance1150/messages/chat',
-                headers: {'content-type': 'application/x-www-form-urlencoded'},
-                form: {
-                  token: 'Instance_token',
-                  to: '3436222320',
-                  body: 'WhatsApp API on UltraMsg.com works good',
-                  priority: '10',
-                  referenceId: ''
-                }
-              };
-              request(options, function (error, response, body) {
-                if (error) throw new Error(error);
+
+            //  // Send the text message.
+            // client.messages.create({
+            //         to: '+543436222320',
+            //         from: 'YOUR_TWILIO_NUMBER',
+            //         body: 'Hello prueba!'
+            // })
+
+            // .then(message => console.log(message.sid)) 
+            // .done();
+
+
+
+            // var options = {
+            //     method: 'POST',
+            //     url: 'https://api.ultramsg.com/instance1150/messages/chat',
+            //     headers: {'content-type': 'application/x-www-form-urlencoded'},
+            //     form: {
+            //       token: 'Instance_token',
+            //       to: '3436222320',
+            //       body: 'WhatsApp API on UltraMsg.com works good',
+            //       priority: '10',
+            //       referenceId: ''
+            //     }
+            //   };
+            //   request(options, function (error, response, body) {
+            //     if (error) throw new Error(error);
               
-                console.log(body);
-              });
+            //     console.log(body);
+            //   });
 
 
         }        
@@ -93,6 +105,8 @@ router.post('/NewClient',async(req,res)=>{
     cliente.cellphone=req.body.data.cellphone;
     cliente.email=req.body.data.email;
     cliente.deuda=0;
+    cliente.buys=[];
+    cliente.pays=[];
    
 
     try {
@@ -114,28 +128,19 @@ router.post('/NewClient',async(req,res)=>{
 router.post('/AddBuy/:id',async(req,res)=>{
     const id=req.params.id
     const cliente= await Clients.findOne({_id:id});
-    
     if (cliente){
-        cliente.buys=[];
-        cliente.pays=[];
 
-    if(req.body.data.pays){
-        cliente.pays.push(req.body.data.pays);}
-    if(cliente.buys){cliente.buys.push(req.body.data.buys);}
-    
-    
-    let TotalBuys=0;
-    let TotalPays=0;
     if(cliente.buys){
-        for(let x=0;x<cliente.buys.length;x++){TotalBuys+=cliente.buys[x].subtotal}
-    }
-    if(cliente.pays){
-        for(let x=0;x<cliente.pays.length;x++){TotalPays+=cliente.pays[x].entrega}
+        cliente.buys.push(req.body.data.buys);
+        cliente.deuda+=req.body.data.buys.subtotal;
+    }    
+    
+    if(req.body.data.pays){
+        cliente.pays.push(req.body.data.pays);
+        cliente.deuda-=req.body.data.pays.entrega;
         
     }
-    console.log(TotalBuys)
-    console.log(TotalPays)
-    cliente.deuda=TotalBuys-TotalPays;
+
     try {
          cliente.save();
          res.json({
@@ -157,20 +162,11 @@ router.post('/AddBuy/:id',async(req,res)=>{
 router.post('/AddPay/:id',async(req,res)=>{
     const id=req.params.id
     const cliente= await Clients.findOne({_id:id});
+
     if(cliente){
     cliente.pays.push(req.body.data);
-    let TotalBuys=0;
-    let TotalPays=0;
-    if(cliente.buys){
-        for(let x=0;x<cliente.buys.length;x++){TotalBuys+=cliente.buys[x].subtotal}
-    }
-    if(cliente.pays){
-        for(let x=0;x<cliente.pays.length;x++){TotalPays+=cliente.pays[x].entrega}
-        
-    }
-    console.log(TotalBuys)
-    console.log(TotalPays)
-    cliente.deuda=TotalBuys-TotalPays;
+
+    cliente.deuda-=req.body.data.entrega;
     try {
          cliente.save();
          res.json({
