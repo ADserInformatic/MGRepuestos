@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoaderService } from 'src/app/services/loader.service';
 import { PeticionesService } from 'src/app/services/peticiones.service';
 
 
@@ -12,7 +13,9 @@ export class PrincipalComponent implements OnInit {
   public pagos: boolean = false;
   public ventas: boolean = true;
   public clientes: any;
-  constructor(private servApi: PeticionesService) { }
+  public isLoading$ = this.loadServ.isLoading$;
+  constructor(private servApi: PeticionesService,
+              private loadServ: LoaderService) { }
 
   ngOnInit(): void {
     this.actualizar()

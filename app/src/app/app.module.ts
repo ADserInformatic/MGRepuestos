@@ -10,6 +10,7 @@ import { PrincipalComponent } from './components/principal/principal.component';
 import { DeudoresComponent } from './components/deudores/deudores.component';
 import { PagosComponent } from './components/pagos/pagos.component';
 import { VentasComponent } from './components/ventas/ventas.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { VentasComponent } from './components/ventas/ventas.component';
     PrincipalComponent,
     DeudoresComponent,
     PagosComponent,
-    VentasComponent
+    VentasComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

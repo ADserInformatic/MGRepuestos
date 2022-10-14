@@ -11,3 +11,4 @@
         <app-ventas (atualizarDatos)="actualizar()" [clientes]="clientes" *ngIf="ventas"></app-ventas>
     </div>
 </div>
+<app-loader *ngIf="isLoading$ | async"></app-loader>
