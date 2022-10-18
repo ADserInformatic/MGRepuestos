@@ -9,7 +9,8 @@ const cron =require ('node-cron')//para programar tarea
 // Find your account sid and auth token in your Twilio account Console.
 //var client = new twilio('MG831f19fb057c965a23e4788103079286', '[Redacted]');
 const accountSid = 'ACb3b1b7a3bf7538f5908756d7dcb42d20'; 
-const authToken = '84bf2bb58b9d198fde3de0b28c3ab989'; 
+//const authToken = '84bf2bb58b9d198fde3de0b28c3ab989'; 
+const authToken = '627a72a6f88c8f8d3cf00bf0c15ec4ec'
 const client = require('twilio')(accountSid, authToken); 
 
 
