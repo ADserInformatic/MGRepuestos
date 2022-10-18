@@ -12,7 +12,7 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.use(express.raw());
-app.use(express.static(__dirname + '/app'))
+app.use(express.static(__dirname + '/app/src'))
 
 const uri=`mongodb+srv://mariagranderepuestos:cuentaCuenta@cluster0.hjawbpo.mongodb.net/Cluster0?retryWrites=true&w=majority`
 const option={ useNewUrlParser: true, useUnifiedTopology: true };
@@ -35,6 +35,7 @@ mongoose.connect(uri,{
 //          mensaje: 'functiona prueba para mostrar!'
 //     })
 //  });
+
  const PORT=process.env.PORT || 3001;
 app.listen(PORT, ()=>{
   console.log(`servidor andando en: ${PORT}`)})
