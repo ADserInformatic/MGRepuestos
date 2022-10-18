@@ -1,4 +1,4 @@
 export const environment = {
-  urlApi: 'http://localhost:3001',
+  urlApi: 'https://mariagranderepuestos.herokuapp.com/',
   production: true
 };
