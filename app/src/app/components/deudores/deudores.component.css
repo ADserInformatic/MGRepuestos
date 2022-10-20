@@ -18,8 +18,8 @@
 }
 .deudores .title{
     width: 100%;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     border-bottom: solid .7px #000;
     
 }
@@ -27,9 +27,27 @@
     list-style: none;
     border-bottom: solid .7px var(--color3);
     padding: 10px 5px 0px;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 .deudores li:hover{
     background: var(--color3);
+}
+.deudores .botones{
+    text-align: center;
+}
+.deudores button{
+    margin: 5px;
+    padding: 5px;
+    border-radius: 2px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+}
+.deudores button.saldar{
+    background: var(--color2);
+}
+.deudores button.detalles{
+    background: #000;
 }

@@ -12,6 +12,7 @@ import { PagosComponent } from './components/pagos/pagos.component';
 import { VentasComponent } from './components/ventas/ventas.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { ClienteComponent } from './components/deudores/cliente/cliente.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
     DeudoresComponent,
     PagosComponent,
     VentasComponent,
-    LoaderComponent
+    LoaderComponent,
+    ClienteComponent
   ],
   imports: [
     BrowserModule,

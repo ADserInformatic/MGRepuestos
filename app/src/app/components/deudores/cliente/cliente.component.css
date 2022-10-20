@@ -1,0 +1,17 @@
+.body{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.479);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+.body .compras{
+    background: #fff;
+    color: #000;
+    width: 60%;
+    margin: 10% 0px;
+    padding: 20px 10px;
+}

@@ -5,11 +5,17 @@
             <div class="title">
                 <h3>Cliente</h3>
                 <h3>Monto</h3>
+                <h3></h3>
             </div>
             <li *ngFor="let item of clientes">
                 <p>{{item.name}}</p>
                 <p>{{item.deuda | currency}}</p>
+                <p class="botones">
+                    <button (click)="saldar(item.deuda)" title="Saldar deuda" class="saldar">Saldar</button>
+                    <button (click)="verCliente(item)" title="Ver detalles" class="detalles">Detalles</button>
+                </p>
             </li>
         </div>
     </div>
 </div>
+<app-cliente [cliente]="cliente" *ngIf="detalles"></app-cliente>
