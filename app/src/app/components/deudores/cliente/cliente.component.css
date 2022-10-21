@@ -14,4 +14,26 @@
     width: 60%;
     margin: 10% 0px;
     padding: 20px 10px;
+    position: relative;
+}
+.compras button{
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    background: transparent;
+    border: none;
+    color: #fff;
+}
+.gral{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+}
+.gral li{
+    list-style: none;
+    margin-top: 10px;
+}
+.gral h3{
+    margin-top: 10px;
+    margin-bottom: 10px
 }

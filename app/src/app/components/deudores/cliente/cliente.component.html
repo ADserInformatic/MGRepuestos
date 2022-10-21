@@ -2,7 +2,30 @@
     <div class="compras">
         <button (click)="cerrar()">x</button>
         <h2>Detalles de compras de {{cliente.name}} {{cliente.lastname}}</h2>
-        <p>cliente works! {{cliente.deuda}}</p> 
+        <div class="gral">
+            <div class="compra">
+                <h3>Compras</h3>
+                <hr>
+                <li *ngFor="let item of cliente.buys">
+                    {{item.fecha}}
+                    <div class="productos" *ngFor="let i of item.productos">
+                        <p><b>Producto: </b>{{i.detalle}}</p>
+                        <p><b>Cantidad: </b>{{i.cantida}}</p>
+                        <p><b>Precio unitario: </b>{{i.precioU | currency}}</p>
+                        <p><b>Precio total: </b>{{i.precioT | currency}}</p>
+                    </div>
+                    <span>Total: <i>{{item.subtotal | currency}}</i></span>
+                </li>
+            </div>
+            <div class="pagos">
+                <h3>Pagos</h3>
+                <hr>
+                <li *ngFor="let item of cliente.pays">
+                    {{item.fecha}} - {{item.entrega | currency}}
+                </li>
+            </div> 
+        </div> 
+        
     </div>
 </div>
 

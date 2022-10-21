@@ -22,6 +22,7 @@ export class DeudoresComponent implements OnInit {
   verCliente(cliente){
     this.cliente = cliente;
     this.detalles = true;
+    console.log(cliente)
   }
 
   ocultarCliente(){
