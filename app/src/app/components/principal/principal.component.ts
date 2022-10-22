@@ -19,6 +19,9 @@ export class PrincipalComponent implements OnInit {
 
   ngOnInit(): void {
     this.actualizar()
+    this.servApi.actual.subscribe(res=>{
+      this.actualizar()
+    })
   }
   deudas(){
     this.deudores = true;

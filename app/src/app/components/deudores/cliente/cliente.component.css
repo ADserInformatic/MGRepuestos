@@ -15,14 +15,34 @@
     margin: 10% 0px;
     padding: 20px 10px;
     position: relative;
+    /* max-height: 60vh; */
+    overflow: hidden;
+}
+.compras h2{
+    padding: 10px 30px;
+}
+.compras a{
+    text-decoration: none;
+    color: #25D366;
+    font-size: 30px;
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
 }
 .compras button{
     position: absolute;
-    top: -20px;
-    right: -20px;
+    top: -30px;
+    right: -30px;
     background: transparent;
     border: none;
     color: #fff;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    padding: 10px;
+    border-radius: 50%;
+}
+.compras button:hover{
+    border: solid .5px var(--color3);
 }
 .gral{
     display: grid;
@@ -35,5 +55,27 @@
 }
 .gral h3{
     margin-top: 10px;
-    margin-bottom: 10px
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+    border: solid 1px #000;
+}
+.compras .gral li{
+    border-top: solid 1px #000;
+    margin-top: 20px;
+}
+.compras .gral .productos{
+    border-top: solid 1px var(--color3);
+    border-bottom: solid 1px var(--color3);
+    padding: 10px 0px;
+}
+.fecha{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+.compra, .pagos{
+    padding: 0px 30px;
 }

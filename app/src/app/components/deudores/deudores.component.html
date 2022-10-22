@@ -11,11 +11,11 @@
                 <p>{{item.name}}</p>
                 <p>{{item.deuda | currency}}</p>
                 <p class="botones">
-                    <button (click)="saldar(item.deuda)" title="Saldar deuda" class="saldar">Saldar</button>
+                    <button (click)="saldar(item)" title="Saldar deuda" class="saldar">Saldar</button>
                     <button (click)="verCliente(item)" title="Ver detalles" class="detalles">Detalles</button>
                 </p>
             </li>
         </div>
     </div>
 </div>
-<app-cliente [cliente]="cliente" *ngIf="detalles"></app-cliente>
+<app-cliente *ngIf="detalles" (cerrarEmit)="ocultarCliente()" [cliente]="cliente" ></app-cliente>
