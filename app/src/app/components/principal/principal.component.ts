@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 import { PeticionesService } from 'src/app/services/peticiones.service';
 
@@ -8,8 +9,9 @@ import { PeticionesService } from 'src/app/services/peticiones.service';
   templateUrl: './principal.component.html',
   styleUrls: ['./principal.component.css']
 })
-export class PrincipalComponent implements OnInit {
+export class PrincipalComponent implements OnInit, OnDestroy {
   public deudores: boolean = false;
+  public subsripcion: Subscription;
   public pagos: boolean = false;
   public ventas: boolean = true;
   public clientes: any;
@@ -18,10 +20,13 @@ export class PrincipalComponent implements OnInit {
               private loadServ: LoaderService) { }
 
   ngOnInit(): void {
-    this.actualizar()
-    this.servApi.actual.subscribe(res=>{
+    this.subsripcion = this.servApi._refresh$.subscribe(()=>{
       this.actualizar()
     })
+    this.actualizar()
+  }
+  ngOnDestroy(): void {
+    this.subsripcion.unsubscribe();
   }
   deudas(){
     this.deudores = true;

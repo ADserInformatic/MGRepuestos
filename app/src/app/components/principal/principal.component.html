@@ -5,8 +5,7 @@
         <button [ngClass]="{'select': ventas}" (click)="venta()">Venta</button>
     </div>
     <div class="seccion">
-        <!-- <router-outlet></router-outlet> -->
-        <app-deudores [clientes]="clientes" *ngIf="deudores"></app-deudores>
+        <app-deudores (atualizarDatos)="actualizar()" [clientes]="clientes" *ngIf="deudores"></app-deudores>
         <app-pagos (atualizarDatos)="actualizar()" [clientes]="clientes" *ngIf="pagos"></app-pagos>
         <app-ventas (atualizarDatos)="actualizar()" [clientes]="clientes" *ngIf="ventas"></app-ventas>
     </div>

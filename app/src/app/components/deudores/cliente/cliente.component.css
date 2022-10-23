@@ -15,8 +15,6 @@
     margin: 10% 0px;
     padding: 20px 10px;
     position: relative;
-    /* max-height: 60vh; */
-    overflow: hidden;
 }
 .compras h2{
     padding: 10px 30px;
@@ -26,8 +24,8 @@
     color: #25D366;
     font-size: 30px;
     position: absolute;
-    bottom: 20px;
-    right: 30px;
+    top: 20px;
+    right: 40px;
 }
 .compras button{
     position: absolute;
@@ -78,4 +76,6 @@
 }
 .compra, .pagos{
     padding: 0px 30px;
+    height: 100%;
+    overflow: hidden;
 }

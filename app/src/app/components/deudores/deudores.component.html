@@ -8,12 +8,15 @@
                 <h3></h3>
             </div>
             <li *ngFor="let item of clientes">
-                <p>{{item.name}}</p>
-                <p>{{item.deuda | currency}}</p>
-                <p class="botones">
-                    <button (click)="saldar(item)" title="Saldar deuda" class="saldar">Saldar</button>
-                    <button (click)="verCliente(item)" title="Ver detalles" class="detalles">Detalles</button>
-                </p>
+                <ng-container *ngIf="item.deuda > 0">
+                    <p>{{item.name}}</p>
+                    <p>{{item.deuda | currency}}</p>
+                    <p class="botones">
+                        <button (click)="saldar(item)" title="Saldar deuda" class="saldar">Saldar</button>
+                        <button (click)="verCliente(item)" title="Ver detalles" class="detalles">Detalles</button>
+                    </p>  
+                </ng-container>
+                
             </li>
         </div>
     </div>

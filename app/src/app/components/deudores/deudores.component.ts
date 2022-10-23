@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PeticionesService } from 'src/app/services/peticiones.service';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
@@ -11,6 +11,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class DeudoresComponent implements OnInit {
   @Input() clientes: any;
+  @Output() atualizarDatos = new EventEmitter()
   public detalles: boolean = false;
   public cliente: any;
   public pdfDef: any;
@@ -19,16 +20,19 @@ export class DeudoresComponent implements OnInit {
   constructor(private apiServ: PeticionesService) { }
 
   ngOnInit(): void {
-    
+    this.atualizarDatos.emit()
   }
   saldar(cliente){
     console.log(cliente)
+    if(!confirm("Seguro que desea cancelar la deuda de " + cliente.name + ' ' + cliente.lastname)){
+      return
+    }
     const data = {data: {
       fecha: this.fecha,
       entrega: cliente.deuda
     }}
     this.apiServ.addpay(cliente._id, data).subscribe(res=>{
-      this.apiServ.actual.emit()
+      this.atualizarDatos.emit()
     })
     this.pdfDef = {
       content: [
