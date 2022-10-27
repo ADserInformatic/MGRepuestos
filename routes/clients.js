@@ -128,6 +128,7 @@ router.post('/AddBuy/:id',async(req,res)=>{
 router.post('/AddPay/:id',async(req,res)=>{
     const id=req.params.id
     const cliente= await Clients.findOne({_id:id});
+    console.log(req.body)
 
     if(!cliente){return res.json({error:true, mensaje: "codigo",message: "no encontro cliente"})}
     cliente.pays.push(req.body.data);

@@ -83,7 +83,6 @@ export class PagosComponent implements OnInit {
       }
       const pdf = pdfMake.createPdf(this.pdfDef);
       pdf.open();
-      window.location.reload()
 
 
   }
