@@ -1,0 +1,53 @@
+.body{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.body .datos{
+    border: solid .7px #fff;
+    width: 80%;
+    margin: auto;
+    background: #fff;
+}
+.datos h2{
+    padding: 10px;
+}
+.body .datos .deudores{
+    margin: 10px 0px 20px 0px;
+    padding: 10px;
+}
+.deudores .title{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: solid .7px #000;
+    
+}
+.deudores li{
+    list-style: none;
+    border-bottom: solid .7px var(--color3);
+    padding: 10px 5px 0px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.deudores li:hover{
+    background: var(--color3);
+}
+.deudores .botones{
+    text-align: center;
+}
+.deudores button{
+    margin: 5px;
+    padding: 5px;
+    border-radius: 2px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+}
+.deudores button.saldar{
+    background: var(--color2);
+}
+.deudores button.detalles{
+    background: #000;
+}

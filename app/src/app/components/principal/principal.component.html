@@ -1,0 +1,13 @@
+<div class="body">
+    <div class="lateral">
+        <button [ngClass]="{'select': deudores}" (click)="deudas()">Deudores</button>
+        <button [ngClass]="{'select': pagos}" (click)="pago()">Pagos</button>
+        <button [ngClass]="{'select': ventas}" (click)="venta()">Venta</button>
+    </div>
+    <div class="seccion">
+        <app-deudores (atualizarDatos)="actualizar()" [clientes]="clientes" *ngIf="deudores"></app-deudores>
+        <app-pagos (atualizarDatos)="actualizar()" [clientes]="clientes" *ngIf="pagos"></app-pagos>
+        <app-ventas (atualizarDatos)="actualizar()" [clientes]="clientes" *ngIf="ventas"></app-ventas>
+    </div>
+</div>
+<app-loader *ngIf="isLoading$ | async"></app-loader>

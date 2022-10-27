@@ -1,0 +1,24 @@
+<div class="body">
+    <div class="datos">
+        <h2>Deudores</h2>
+        <div class="deudores">
+            <div class="title">
+                <h3>Cliente</h3>
+                <h3>Monto</h3>
+                <h3></h3>
+            </div>
+            <li *ngFor="let item of clientes">
+                <ng-container *ngIf="item.deuda > 0">
+                    <p>{{item.name}}</p>
+                    <p>{{item.deuda | currency}}</p>
+                    <p class="botones">
+                        <button (click)="saldar(item)" title="Saldar deuda" class="saldar">Saldar</button>
+                        <button (click)="verCliente(item)" title="Ver detalles" class="detalles">Detalles</button>
+                    </p>  
+                </ng-container>
+                
+            </li>
+        </div>
+    </div>
+</div>
+<app-cliente *ngIf="detalles" (cerrarEmit)="ocultarCliente()" [cliente]="cliente" ></app-cliente>
