@@ -3,7 +3,7 @@
     <div class="compras">
         <button (click)="cerrar()"><i class="icofont-ui-close"></i></button>
         <h2>Detalles de compras de {{cliente.name}} {{cliente.lastname}}</h2>
-        <a target="_blank" title="Notificar deuda" href="https://api.whatsapp.com/send?phone=5493435341866&text=Hola, {{cliente.name}}. Le recuerdo desde María Grande Repuestos que usted tiene una deuda de {{cliente.deuda | currency}}"><i class="icofont-whatsapp"></i></a>
+        <a target="_blank" title="Notificar deuda" href="https://api.whatsapp.com/send?phone=549{{cliente.cellphone}}&text=Hola, {{cliente.name}}. Le recuerdo desde María Grande Repuestos que usted tiene una deuda de {{cliente.deuda | currency}}"><i class="icofont-whatsapp"></i></a>
         <div class="gral">
             <div class="compra">
                 <h3>Compras</h3>
