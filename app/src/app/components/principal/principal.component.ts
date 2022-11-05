@@ -10,7 +10,7 @@ import { PeticionesService } from 'src/app/services/peticiones.service';
   styleUrls: ['./principal.component.css']
 })
 export class PrincipalComponent implements OnInit, OnDestroy {
-  public deudores: boolean = false;
+  public deudores: boolean;
   public subsripcion: Subscription;
   public pagos: boolean = false;
   public ventas: boolean = true;
@@ -24,6 +24,7 @@ export class PrincipalComponent implements OnInit, OnDestroy {
       this.actualizar()
     })
     this.actualizar()
+    this.deudores = false;
   }
   ngOnDestroy(): void {
     this.subsripcion.unsubscribe();

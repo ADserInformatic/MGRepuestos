@@ -3,27 +3,31 @@
     <div class="compras">
         <button (click)="cerrar()"><i class="icofont-ui-close"></i></button>
         <h2>Detalles de compras de {{cliente.name}} {{cliente.lastname}}</h2>
-        <a target="_blank" title="Notificar deuda" href="https://api.whatsapp.com/send?phone=5493435341866&text=Hola, {{cliente.name}}. Le recuerdo desde María Grande Repuestos que usted tiene una deuda de {{cliente.deuda | currency}}"><i class="icofont-whatsapp"></i></a>
+        <a target="_blank" title="Notificar deuda" href="https://api.whatsapp.com/send?phone=549{{cliente.cellphone}}&text=Hola, {{cliente.name}}. Le recuerdo desde María Grande Repuestos que usted tiene una deuda de {{cliente.deuda | currency}}"><i class="icofont-whatsapp"></i></a>
         <div class="gral">
             <div class="compra">
                 <h3>Compras</h3>
-                <li *ngFor="let item of cliente.buys">
-                    <span class="fecha"><h4>{{item.fecha}} </h4></span>
-                    <div class="productos" *ngFor="let i of item.productos">
-                        <p><b>Producto: </b>{{i.detalle}}</p>
-                        <p><b>Cantidad: </b>{{i.cantida}}</p>
-                        <p><b>Precio unitario: </b>{{i.precioU | currency}}</p>
-                        <p><b>Precio total: </b>{{i.precioT | currency}}</p>
-                    </div>
-                    <span><b>Total: </b> <i>{{item.subtotal | currency}}</i></span>
-                </li>
+                <div class="informe">
+                    <li *ngFor="let item of cliente.buys">
+                        <span class="fecha"><h4>{{item.fecha}} </h4></span>
+                        <div class="productos" *ngFor="let i of item.productos">
+                            <p><b>Producto: </b>{{i.detalle}}</p>
+                            <p><b>Cantidad: </b>{{i.cantida}}</p>
+                            <p><b>Precio unitario: </b>{{i.precioU | currency}}</p>
+                            <p><b>Precio total: </b>{{i.precioT | currency}}</p>
+                        </div>
+                        <span><b>Total: </b> <i>{{item.subtotal | currency}}</i></span>
+                    </li>
+                </div>
             </div>
             <div class="pagos">
                 <h3>Pagos</h3>
-                <li *ngFor="let item of cliente.pays">
-                    <span class="fecha"><h4>{{item.fecha}} </h4></span>
-                    <p><b>Entregó: {{item.entrega | currency}}</b></p> 
-                </li>
+                <div class="informe">
+                    <li *ngFor="let item of cliente.pays">
+                        <span class="fecha"><h4>{{item.fecha}} </h4></span>
+                        <p><b>Entregó: {{item.entrega | currency}}</b></p> 
+                    </li>
+                </div>
             </div> 
         </div> 
         

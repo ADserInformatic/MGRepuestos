@@ -41,8 +41,7 @@ export class VentasComponent implements OnInit {
     this.formCliente = this.fb.group({
       name: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
-      cellphone: ['', [Validators.required]],
-      email: ['', [Validators.required]]
+      cellphone: ['', [Validators.required]]
     })
     
 

@@ -69,7 +69,6 @@ router.post('/NewClient',async(req,res)=>{
     cliente.name=req.body.data.name;
     cliente.lastname=req.body.data.lastname;
     cliente.cellphone=req.body.data.cellphone;
-    cliente.email=req.body.data.email;
     cliente.deuda=0;
     cliente.buys=[];
     cliente.pays=[];
