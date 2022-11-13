@@ -159,9 +159,9 @@ export class VentasComponent implements OnInit {
       }
     }
     this.servApi.newBuy(this.seleccion.nativeElement.value, buy).subscribe(res=>{
-      console.log(res)
       this.compra = [];
       this.total = 0;
+      this.atualizarDatos.emit()
     })
   }
 
