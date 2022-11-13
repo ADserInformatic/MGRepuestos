@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  urlApi: 'http://localhost:3001',
+  // urlApi: 'http://localhost:3001',
+  urlApi: 'https://mg-repuestos.vercel.app/',
   production: false
 };
 
