@@ -12,6 +12,7 @@
     "uuid": "^9.0.0"
   },
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "index.js"
   }
 }
