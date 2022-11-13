@@ -34,6 +34,6 @@ export class PeticionesService {
     )
   }
   login(user: any): Observable<any>{
-    return this.http.post(`${this.url}/api/login/login`, user)
+    return this.http.post(`${this.url}api/login/login`, user)
   }
 }
