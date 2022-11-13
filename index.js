@@ -29,12 +29,12 @@ mongoose.connect(uri,{
  app.use('/api/login',Login);
 
 
- app.get('/',(req,res)=>{
-     res.json({
-         estado:true,
-         mensaje: 'functiona prueba para mostrar!'
-    })
- });
+//  app.get('/',(req,res)=>{
+//      res.json({
+//          estado:true,
+//          mensaje: 'functiona prueba para mostrar!'
+//     })
+//  });
  const PORT=process.env.PORT || 3001;
 app.listen(PORT, ()=>{
   console.log(`servidor andando en: ${PORT}`)})
