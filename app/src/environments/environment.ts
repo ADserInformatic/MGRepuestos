@@ -4,7 +4,7 @@
 
 export const environment = {
   // urlApi: 'http://localhost:3001',
-  urlApi: 'https://mg-repuestos.vercel.app/',
+  urlApi: 'https://mg-repuestos.vercel.app',
   production: false
 };
 
