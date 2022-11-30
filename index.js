@@ -35,7 +35,6 @@ mongoose.connect(uri,{
 //          mensaje: 'functiona prueba para mostrar!'
 //     })
 //  });
-
  const PORT=process.env.PORT || 3001;
 app.listen(PORT, ()=>{
   console.log(`servidor andando en: ${PORT}`)})
