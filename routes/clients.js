@@ -136,12 +136,12 @@ router.post('/AddBuy/:id',async(req,res)=>{
 
     if(cliente.buys){
         cliente.buys.push(req.body.data.buys);
-        cliente.deuda+=req.body.data.buys.subtotal;
+        cliente.deuda+=parseFloat(req.body.data.buys.subtotal);
     }    
     
     if(req.body.data.pays){
         cliente.pays.push(req.body.data.pays);
-        cliente.deuda-=req.body.data.pays.entrega;
+        cliente.deuda-=parseFloat(req.body.data.pays.entrega);
         
     }
 
@@ -173,7 +173,7 @@ router.post('/AddPay/:id',async(req,res)=>{
 
     cliente.pays.push(req.body.data);
 
-    cliente.deuda-=req.body.data.entrega;
+    cliente.deuda-=parseFloat(req.body.data.entrega);
     try {
          cliente.save();
          res.json({
