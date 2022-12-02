@@ -108,7 +108,7 @@ router.post('/NewClient',async(req,res)=>{
     cliente.name=req.body.data.name;
     cliente.lastname=req.body.data.lastname;
     cliente.cellphone=req.body.data.cellphone;
-    cliente.deuda=0;
+    cliente.deuda=Number(0);
     cliente.buys=[];
     cliente.pays=[];
    
@@ -136,12 +136,12 @@ router.post('/AddBuy/:id',async(req,res)=>{
 
     if(cliente.buys){
         cliente.buys.push(req.body.data.buys);
-        cliente.deuda+=parseFloat(req.body.data.buys.subtotal);
+        cliente.deuda+=Number(req.body.data.buys.subtotal);
     }    
     
     if(req.body.data.pays){
         cliente.pays.push(req.body.data.pays);
-        cliente.deuda-=parseFloat(req.body.data.pays.entrega);
+        cliente.deuda-=Number(req.body.data.pays.entrega);
         
     }
 
@@ -173,7 +173,7 @@ router.post('/AddPay/:id',async(req,res)=>{
 
     cliente.pays.push(req.body.data);
 
-    cliente.deuda-=parseFloat(req.body.data.entrega);
+    cliente.deuda-=Number(req.body.data.entrega);
     try {
          cliente.save();
          res.json({
